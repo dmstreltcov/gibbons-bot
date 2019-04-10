@@ -20,13 +20,7 @@
             <artifactId>retrofit</artifactId>
             <version>2.5.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.github.rubenlagus.TelegramBots</groupId>
-            <artifactId>Bots</artifactId>
-            <version>4.1.2</version>
-        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
