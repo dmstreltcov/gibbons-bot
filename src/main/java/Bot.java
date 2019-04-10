@@ -34,7 +34,7 @@ public class Bot extends TelegramLongPollingBot {
      * @return имя бота
      */
     public String getBotUsername() {
-        return "Gibbons";
+        return System.getenv("bot_name");
     }
 
     /**
@@ -42,6 +42,7 @@ public class Bot extends TelegramLongPollingBot {
      * @return token для бота
      */
     public String getBotToken() {
-        return "757914104:AAFHwpIBUNrTMkTmTshkPoYezitynvcVXKM";
+        return System.getenv("bot_token");
+
     }
 }
