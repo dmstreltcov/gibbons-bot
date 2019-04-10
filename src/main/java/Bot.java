@@ -9,19 +9,22 @@ public class Bot extends TelegramLongPollingBot {
      */
     public void onUpdateReceived(Update update) {
         String message = update.getMessage().getText();
-        sendMsg(update.getMessage().getChatId().toString(), message);
+        switch (message){
+            case "/menu":
+                System.out.println("Menu");
+                sendMessage(update.getMessage().getChatId().toString(),"You have choosed Menu");
+                break;
+            case "/start":
+                System.out.println("Start");
+                sendMessage(update.getMessage().getChatId().toString(),"Hello Beatch");
+            default:
+        }
     }
-
-    /**
-     * Метод для настройки сообщения и его отправки.
-     * @param chatId id чата
-     * @param s Строка, которую необходимот отправить в качестве сообщения.
-     */
-    public synchronized void sendMsg(String chatId, String s) {
+    public synchronized void sendMessage(String chatId, String text) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.enableMarkdown(true);
         sendMessage.setChatId(chatId);
-        sendMessage.setText(s);
+        sendMessage.setText(text);
         try {
             execute(sendMessage);
         } catch (TelegramApiException e) {
@@ -29,18 +32,9 @@ public class Bot extends TelegramLongPollingBot {
         }
     }
 
-    /**
-     * Метод возвращает имя бота, указанное при регистрации.
-     * @return имя бота
-     */
     public String getBotUsername() {
         return System.getenv("bot_name");
     }
-
-    /**
-     * Метод возвращает token бота для связи с сервером Telegram
-     * @return token для бота
-     */
     public String getBotToken() {
         return System.getenv("bot_token");
 
