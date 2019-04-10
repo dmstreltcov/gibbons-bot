@@ -1,15 +1,17 @@
-import org.telegram.telegrambots.ApiContextInitializer;
-import org.telegram.telegrambots.meta.TelegramBotsApi;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.UpdatesListener;
+import com.pengrad.telegrambot.model.Update;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        ApiContextInitializer.init();
-        TelegramBotsApi botsApi = new TelegramBotsApi();
-        try {
-            botsApi.registerBot(new Bot());
-        }catch (TelegramApiException ex){
-            ex.printStackTrace();
-        }
+        TelegramBot bot = new TelegramBot("757914104:AAFHwpIBUNrTMkTmTshkPoYezitynvcVXKM");
+        bot.setUpdatesListener(new UpdatesListener() {
+            public int process(List<Update> list) {
+                System.out.println(list.get(1));
+                return UpdatesListener.CONFIRMED_UPDATES_ALL;
+            }
+        });
     }
 }
