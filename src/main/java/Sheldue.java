@@ -40,6 +40,7 @@ public class Sheldue {
 
     private boolean isArticlesIsEmpty(){
         System.out.println("isArticlesIsEmpty method");
+        System.out.println(articles);
        return articles.isEmpty();
     }
 
