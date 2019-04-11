@@ -51,7 +51,7 @@ public class Sheldue {
         ses = Executors.newScheduledThreadPool(1);
         Runnable pinger = new Runnable() {
             public void run(){
-                if(isArticlesIsEmpty()){
+                if(articles == null){
                     try {
                         System.out.println("Try to get articles");
                         getArticles(getNews());
