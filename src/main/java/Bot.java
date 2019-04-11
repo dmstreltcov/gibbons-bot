@@ -2,7 +2,10 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
 public class Bot extends TelegramLongPollingBot {
+
+    public testTask testTask = new testTask();
 
     public void onUpdateReceived(Update update) {
         String message = update.getMessage().getText();
@@ -14,6 +17,12 @@ public class Bot extends TelegramLongPollingBot {
             case "/start":
                 System.out.println("Start");
                 sendMessage(update.getMessage().getChatId().toString(),"Hello Beatch");
+                break;
+            case "/run":
+                testTask.onPing(update.getMessage().getChatId().toString());
+                break;
+            case "/stop":
+                testTask.onStop();
             default:
         }
     }
