@@ -16,14 +16,14 @@ public class Bot extends TelegramLongPollingBot {
                 break;
             case "/start":
                 System.out.println("Start");
-                sendMessage(update.getMessage().getChatId().toString(),"Hello Beatch");
+                sendMessage(update.getMessage().getChatId().toString(),"Hello " + update.getMessage().getContact().getFirstName());
                 break;
             case "/run":
-                Sheldue = new Sheldue(update.getMessage().getChatId().toString());
+                Sheldue = new Sheldue(update.getMessage().getChatId().toString(), update.getMessage().getContact().getFirstName());
                 Sheldue.onStart();
                 break;
             case "/stop":
-                Sheldue = new Sheldue(update.getMessage().getChatId().toString());
+                Sheldue = new Sheldue(update.getMessage().getChatId().toString(), update.getMessage().getContact().getFirstName());
                 Sheldue.onStop();
             default:
         }

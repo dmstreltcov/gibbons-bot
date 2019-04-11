@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class Sheldue {
 
     private Bot bot;
+    private String user_name;
     private ScheduledExecutorService ses;
     private ScheduledFuture result;
     private String chat_id;
@@ -22,8 +23,10 @@ public class Sheldue {
     private ServiceNews service = publicist.createRequest().create(ServiceNews.class);
     public ArrayDeque<Article> articles = new ArrayDeque<>();
 
-    Sheldue(String chat_id){
+    Sheldue(String chat_id, String name){
         this.chat_id = chat_id;
+        this.user_name = name;
+
     }
 
     private Item getNews() throws IOException{
@@ -40,27 +43,26 @@ public class Sheldue {
 
     private boolean isArticlesIsEmpty(){
         System.out.println("isArticlesIsEmpty method");
-        System.out.println(articles);
        return articles.isEmpty();
     }
 
     private void sendNews(){
         if(isArticlesIsEmpty()){
             try {
-                System.out.println("Try to get articles");
+                System.out.println(user_name + " try to get articles");
                 getArticles(getNews());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("Take one article from new");
+            System.out.println(user_name + " take one article from new");
 
             article =  articles.pollFirst();
         }
         else{
-            System.out.println("Take one article");
+            System.out.println(user_name + " take one article");
             article = articles.pollFirst();
         }
-        System.out.println("Sending message");
+        System.out.println(user_name + " sending message");
         bot.sendMessage(chat_id,article.getUrl());
     }
 
@@ -77,6 +79,7 @@ public class Sheldue {
     }
 
     public void onStop(){
+        System.out.println(user_name + " try to stop bot");
         result.cancel(true);
     }
 
