@@ -7,7 +7,7 @@ public class Publicist {
 
     public Retrofit createRequest(){
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://newsapi.org/v2")
+                .baseUrl("https://newsapi.org/v2/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
        return retrofit;
