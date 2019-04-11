@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 public class Sheldue {
 
     private Bot bot;
-    private String user_name;
     private ScheduledExecutorService ses;
     private ScheduledFuture result;
     private String chat_id;
@@ -23,9 +22,8 @@ public class Sheldue {
     private ServiceNews service = publicist.createRequest().create(ServiceNews.class);
     public ArrayDeque<Article> articles = new ArrayDeque<>();
 
-    Sheldue(String chat_id, String name){
+    Sheldue(String chat_id){
         this.chat_id = chat_id;
-        this.user_name = name;
 
     }
 
@@ -49,25 +47,25 @@ public class Sheldue {
     private void sendNews(){
         if(isArticlesIsEmpty()){
             try {
-                System.out.println(user_name + " try to get articles");
+                System.out.println("try to get articles");
                 getArticles(getNews());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(user_name + " take one article from new");
+            System.out.println("take one article from new");
 
             article =  articles.pollFirst();
         }
         else{
-            System.out.println(user_name + " take one article");
+            System.out.println("take one article");
             article = articles.pollFirst();
         }
-        System.out.println(user_name + " sending message");
+        System.out.println("sending message");
         bot.sendMessage(chat_id,article.getUrl());
     }
 
 
-    public void onStart() {
+    public ScheduledFuture onStart() {
         bot = new Bot();
         ses = Executors.newScheduledThreadPool(1);
         Runnable pinger = new Runnable() {
@@ -75,11 +73,11 @@ public class Sheldue {
                 sendNews();
             }
         };
-       result = ses.scheduleWithFixedDelay(pinger, 0, 5, TimeUnit.MINUTES);
+        return result = ses.scheduleWithFixedDelay(pinger, 0, 5, TimeUnit.MINUTES);
     }
 
     public void onStop(){
-        System.out.println(user_name + " try to stop bot");
+        System.out.println("try to stop bot");
         result.cancel(true);
     }
 
