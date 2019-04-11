@@ -18,11 +18,11 @@ public class Bot extends TelegramLongPollingBot {
                 System.out.println("Start");
                 sendMessage(update.getMessage().getChatId().toString(),"Hello Beatch");
                 break;
-            case "/news-start":
+            case "/run":
                 Sheldue = new Sheldue(update.getMessage().getChatId().toString());
                 Sheldue.onStart();
                 break;
-            case "/news-stop":
+            case "/stop":
                 Sheldue.onStop();
             default:
         }

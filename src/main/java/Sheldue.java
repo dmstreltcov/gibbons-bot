@@ -27,16 +27,19 @@ public class Sheldue {
     }
 
     private Item getNews() throws IOException{
+        System.out.println("getNews method");
         Response response = service.getNews("ru","technology", System.getenv("news_token")).execute();
         assert response.body() != null;
         return (Item) response.body();
     }
 
     public ArrayDeque<Article> getArticles(Item item){
+        System.out.println("getArticles method");
         return articles = new ArrayDeque<>(item.getArticles());
     }
 
     private boolean isArticlesIsEmpty(){
+        System.out.println("isArticlesIsEmpty method");
        return articles.isEmpty();
     }
 
@@ -49,20 +52,25 @@ public class Sheldue {
             public void run(){
                 if(isArticlesIsEmpty()){
                     try {
+                        System.out.println("Try to get articles");
                         getArticles(getNews());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    System.out.println("Take one article from new");
+
                     article =  articles.pollFirst();
                     bot.sendMessage(chat_id,article.getTitle());
                 }
                 else{
-                article = articles.pollFirst();
+                    System.out.println("Take one article");
+                    article = articles.pollFirst();
                 }
+                System.out.println("Sending message");
                 bot.sendMessage(chat_id,article.getTitle());
             }
         };
-       result = ses.scheduleWithFixedDelay(pinger, 5, 30, TimeUnit.MINUTES);
+       result = ses.scheduleWithFixedDelay(pinger, 5, 30, TimeUnit.SECONDS);
     }
 
     public void onStop(){
