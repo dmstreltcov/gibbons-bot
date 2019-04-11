@@ -20,7 +20,7 @@ public class Sheldue {
     private Article article;
     private Publicist publicist = new Publicist();
     private ServiceNews service = publicist.createRequest().create(ServiceNews.class);
-    public ArrayDeque<Article> articles;
+    public ArrayDeque<Article> articles = new ArrayDeque<>();
 
     Sheldue(String chat_id){
         this.chat_id = chat_id;
@@ -45,7 +45,7 @@ public class Sheldue {
     }
 
     private void sendNews(){
-        if(articles == null){
+        if(isArticlesIsEmpty()){
             try {
                 System.out.println("Try to get articles");
                 getArticles(getNews());
@@ -73,7 +73,7 @@ public class Sheldue {
                 sendNews();
             }
         };
-       result = ses.scheduleWithFixedDelay(pinger, 5, 30, TimeUnit.SECONDS);
+       result = ses.scheduleWithFixedDelay(pinger, 5, 10, TimeUnit.MINUTES);
     }
 
     public void onStop(){
