@@ -23,6 +23,7 @@ public class Bot extends TelegramLongPollingBot {
                 Sheldue.onStart();
                 break;
             case "/stop":
+                Sheldue = new Sheldue(update.getMessage().getChatId().toString());
                 Sheldue.onStop();
             default:
         }
