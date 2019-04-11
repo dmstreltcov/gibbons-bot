@@ -44,6 +44,25 @@ public class Sheldue {
        return articles.isEmpty();
     }
 
+    private void sendNews(){
+        if(articles == null){
+            try {
+                System.out.println("Try to get articles");
+                getArticles(getNews());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Take one article from new");
+
+            article =  articles.pollFirst();
+        }
+        else{
+            System.out.println("Take one article");
+            article = articles.pollFirst();
+        }
+        System.out.println("Sending message");
+        bot.sendMessage(chat_id,article.getTitle());
+    }
 
 
     public void onStart() {
@@ -51,24 +70,7 @@ public class Sheldue {
         ses = Executors.newScheduledThreadPool(1);
         Runnable pinger = new Runnable() {
             public void run(){
-                if(articles == null){
-                    try {
-                        System.out.println("Try to get articles");
-                        getArticles(getNews());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println("Take one article from new");
-
-                    article =  articles.pollFirst();
-                    bot.sendMessage(chat_id,article.getTitle());
-                }
-                else{
-                    System.out.println("Take one article");
-                    article = articles.pollFirst();
-                }
-                System.out.println("Sending message");
-                bot.sendMessage(chat_id,article.getTitle());
+                sendNews();
             }
         };
        result = ses.scheduleWithFixedDelay(pinger, 5, 30, TimeUnit.SECONDS);
