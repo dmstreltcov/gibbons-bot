@@ -61,7 +61,7 @@ public class Sheldue {
             article = articles.pollFirst();
         }
         System.out.println("Sending message");
-        bot.sendMessage(chat_id,article.getTitle());
+        bot.sendMessage(chat_id,article.getTitle() + "\n" + article.getUrl());
     }
 
 
