@@ -73,7 +73,7 @@ public class Sheldue {
                 sendNews();
             }
         };
-       result = ses.scheduleWithFixedDelay(pinger, 5, 10, TimeUnit.MINUTES);
+       result = ses.scheduleWithFixedDelay(pinger, 0, 5, TimeUnit.MINUTES);
     }
 
     public void onStop(){
