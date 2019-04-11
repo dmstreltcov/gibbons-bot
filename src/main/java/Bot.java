@@ -5,7 +5,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class Bot extends TelegramLongPollingBot {
 
-    public testTask testTask = new testTask();
+    public testTask testTask;
 
     public void onUpdateReceived(Update update) {
         String message = update.getMessage().getText();
@@ -19,6 +19,7 @@ public class Bot extends TelegramLongPollingBot {
                 sendMessage(update.getMessage().getChatId().toString(),"Hello Beatch");
                 break;
             case "/run":
+                testTask = new testTask();
                 testTask.onPing(update.getMessage().getChatId().toString());
                 break;
             case "/stop":

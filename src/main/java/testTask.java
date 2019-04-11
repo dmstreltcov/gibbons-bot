@@ -5,13 +5,14 @@ import java.util.concurrent.TimeUnit;
 
 public class testTask {
 
-    public Bot bot = new Bot();
+    public Bot bot;
     public ScheduledExecutorService ses;
     public ScheduledFuture result;
 
 
     public void onPing(final String chatId){
-         ses = Executors.newScheduledThreadPool(1);
+        bot = new Bot();
+        ses = Executors.newScheduledThreadPool(1);
         Runnable pinger = new Runnable() {
             public void run() {
                 bot.sendMessage(chatId, "this is test ping");
