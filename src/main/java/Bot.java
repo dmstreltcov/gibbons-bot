@@ -9,6 +9,7 @@ public class Bot extends TelegramLongPollingBot {
 
     public void onUpdateReceived(Update update) {
         String message = update.getMessage().getText();
+        String name = update.getMessage().getContact().getFirstName();
         switch (message){
             case "/menu":
                 System.out.println("Menu");
@@ -16,14 +17,14 @@ public class Bot extends TelegramLongPollingBot {
                 break;
             case "/start":
                 System.out.println("Start");
-                sendMessage(update.getMessage().getChatId().toString(),"Hello " + update.getMessage().getContact().getFirstName());
+                sendMessage(update.getMessage().getChatId().toString(),"Hello " + name);
                 break;
             case "/run":
-                Sheldue = new Sheldue(update.getMessage().getChatId().toString(), update.getMessage().getContact().getFirstName());
+                Sheldue = new Sheldue(update.getMessage().getChatId().toString(), name);
                 Sheldue.onStart();
                 break;
             case "/stop":
-                Sheldue = new Sheldue(update.getMessage().getChatId().toString(), update.getMessage().getContact().getFirstName());
+                Sheldue = new Sheldue(update.getMessage().getChatId().toString(), name);
                 Sheldue.onStop();
             default:
         }
