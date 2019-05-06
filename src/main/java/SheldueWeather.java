@@ -32,12 +32,16 @@ public class SheldueWeather {
 
     SheldueWeather(String chat_id){
         this.chat_id = chat_id;
-
     }
 
     private Weather sendWeather() throws IOException{
         System.out.println("Send weather method");
+        System.out.println(service);
         Response response = service.getWeather(System.getenv("weather_token"),"Moscow","7").execute();
+        if (response.isSuccessful()){
+            System.out.println("true");
+        }
+        System.out.println(response.code());
         System.out.println(response.body());
         return (Weather) response.body();
     }
