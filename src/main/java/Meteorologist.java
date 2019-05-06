@@ -6,7 +6,7 @@ public class Meteorologist {
 
     public Retrofit createRequest(){
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.apixu.com/v1/")
+                .baseUrl("http://api.apixu.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit;
