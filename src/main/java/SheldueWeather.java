@@ -36,7 +36,7 @@ public class SheldueWeather {
 
     private Weather sendWeather() throws IOException{
         System.out.println("Send weather method");
-        Response response = service.getWeather(System.getenv("weather_token"),"Moscow","7").execute();
+        Response response = service.getWeather(System.getenv("weather_token"),"Paris","7").execute();
         System.out.println("Message: " + response.code() + " " + response.message());
         return (Weather) response.body();
     }
