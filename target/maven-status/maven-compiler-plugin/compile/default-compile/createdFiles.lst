@@ -1,0 +1,6 @@
+api\Weather.class
+api\News.class
+Main.class
+api\WeatherImpl.class
+api\NewsImpl.class
+Bot.class

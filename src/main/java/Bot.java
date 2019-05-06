@@ -5,7 +5,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class Bot extends TelegramLongPollingBot {
 
-    public Sheldue Sheldue;
+    private Sheldue Sheldue;
+    private SheldueWeather SheldueWeather;
 
     public void onUpdateReceived(Update update) {
         String message = update.getMessage().getText();
@@ -18,13 +19,13 @@ public class Bot extends TelegramLongPollingBot {
                 System.out.println("Start");
                 sendMessage(update.getMessage().getChatId().toString(),"Hello Beatch");
                 break;
-            case "/run":
+            case "/news":
                 Sheldue = new Sheldue(update.getMessage().getChatId().toString());
                 Sheldue.onStart();
                 break;
-            case "/stop":
-                Sheldue = new Sheldue(update.getMessage().getChatId().toString());
-                Sheldue.onStop();
+            case "/weather":
+                SheldueWeather = new SheldueWeather(update.getMessage().getChatId().toString());
+                SheldueWeather.onStart();
             default:
         }
     }
