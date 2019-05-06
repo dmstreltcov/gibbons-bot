@@ -7,7 +7,8 @@ import retrofit2.http.Query;
 import weather.Weather;
 
 public interface ServiceWeather {
-    @Headers({"Content-Type: application-json"})
+    @Headers({"Content-Type: application-json",
+            "Accept-Encoding: gzip, deflate"})
     @GET("forecast.json?key=7d675e39903f4485b9f110957190605&q=Moscow&days=7")
     Call<Weather> getWeather();
 }
