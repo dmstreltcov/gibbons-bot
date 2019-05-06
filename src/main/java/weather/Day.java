@@ -46,7 +46,7 @@ public class Day {
     private Integer avghumidity;
     @SerializedName("condition")
     @Expose
-    private Condition_ condition;
+    private Condition condition;
     @SerializedName("uv")
     @Expose
     private Integer uv;
@@ -155,11 +155,11 @@ public class Day {
         this.avghumidity = avghumidity;
     }
 
-    public Condition_ getCondition() {
+    public Condition getCondition() {
         return condition;
     }
 
-    public void setCondition(Condition_ condition) {
+    public void setCondition(Condition condition) {
         this.condition = condition;
     }
 
