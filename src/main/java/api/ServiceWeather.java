@@ -7,6 +7,6 @@ import weather.Weather;
 
 public interface ServiceWeather {
     @GET("/v1/forecast.json")
-    Call<Weather> getWeather(@Query("key") String apikey, @Query("q") String city, @Query("days") String days );
+    Call<Weather> getWeather(@Query("key") String key, @Query("q") String city);
 }
 //http://api.apixu.com/v1/forecast.json?key=7d675e39903f4485b9f110957190605&q=Moscow&days=7
