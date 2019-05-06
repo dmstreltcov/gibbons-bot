@@ -38,8 +38,8 @@ public class SheldueWeather {
 
     private Weather sendWeather() throws IOException{
         System.out.println("Send weather method");
-        Response response = service.getWeather(System.getenv("weather_token"),"Dubna",7).execute();
-        assert response.body() != null;
+        Response response = service.getWeather(System.getenv("weather_token"),"Moscow",7).execute();
+        System.out.println(response.body());
         return (Weather) response.body();
     }
 
@@ -74,7 +74,8 @@ public class SheldueWeather {
 
     private void sendNews() throws IOException{
         System.out.println("sending message method ");
-        bot.sendMessage(chat_id,createMessage(getForecastdays(getForecast(sendWeather()))));
+        String poslanie = createMessage(getForecastdays(getForecast(sendWeather())));
+        bot.sendMessage(chat_id,poslanie);
     }
 
 
