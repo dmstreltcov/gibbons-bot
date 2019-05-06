@@ -2,10 +2,12 @@ package api;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Query;
 import weather.Weather;
 
 public interface ServiceWeather {
+    @Headers({"Accept:application/json", "Content-Type: application-json"})
     @GET("forecast.json?key=7d675e39903f4485b9f110957190605&q=Moscow&days=7")
     Call<Weather> getWeather();
 }
