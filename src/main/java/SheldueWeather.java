@@ -73,7 +73,10 @@ public class SheldueWeather {
 
     private void sendNews() throws IOException{
         System.out.println("sending message method ");
-        String poslanie = createMessage(getForecastdays(getForecast(sendWeather())));
+        Weather weather = sendWeather();
+        Forecast forecast = getForecast(weather);
+        List<Forecastday> forecastday = getForecastdays(forecast);
+        String poslanie = createMessage(forecastday);
         bot.sendMessage(chat_id,poslanie);
     }
 
