@@ -25,6 +25,9 @@ public class SheldueWeather {
     private String chat_id;
     private Meteorologist meteorologist = new Meteorologist();
     private ServiceWeather service = meteorologist.createRequest().create(ServiceWeather.class);
+    private Publicist publicist = new Publicist();
+
+    private ServiceNews service1 = publicist.createRequest().create(ServiceNews.class);
     private List<Forecastday> forecastdays;
     private String day, condition;
     private Integer max_temp;
@@ -36,7 +39,10 @@ public class SheldueWeather {
 
     private Weather sendWeather() throws IOException{
         System.out.println("Send weather method");
-        Response response = service.getWeather(System.getenv("weather_token"),"Moscow").execute();
+        Response response2 = service1.getNews("ru","technology", System.getenv("news_token")).execute();
+        System.out.println(response2.body());
+        Response response = service.getWeather(System.getenv("weather_token"),"Moscow","7").execute();
+
         return (Weather) response.body();
     }
 
