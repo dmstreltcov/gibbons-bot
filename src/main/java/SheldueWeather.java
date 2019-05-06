@@ -49,10 +49,12 @@ public class SheldueWeather {
     }
 
     public List<Forecastday> getForecastdays(Forecast forecast){
+        System.out.println("getForecastdays method");
         return forecastdays = new ArrayList<>(forecast.getForecastday());
     }
 
     public String createMessage(List<Forecastday> forecastdays){
+        System.out.println("createMessage method");
         String message = "";
         for(int i = 0; i < forecastdays.size(); i++){
             day = forecastdays.get(i).getDate();
@@ -70,7 +72,7 @@ public class SheldueWeather {
     }
 
     private void sendNews() throws IOException{
-        System.out.println("sending message");
+        System.out.println("sending message method ");
         bot.sendMessage(chat_id,createMessage(getForecastdays(getForecast(sendWeather()))));
     }
 
@@ -87,7 +89,7 @@ public class SheldueWeather {
                 }
             }
         };
-        return result = ses.scheduleWithFixedDelay(pinger, 0, 5, TimeUnit.MINUTES);
+        return result = ses.scheduleWithFixedDelay(pinger, 0, 5, TimeUnit.SECONDS);
     }
 
     public void onStop(){
