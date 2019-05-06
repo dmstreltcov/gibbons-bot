@@ -67,6 +67,7 @@ public class SheldueWeather {
                         "Min temp: " + min_temp + "\n" +
                         "Wind: " + wind + "\n" +
                         "Condition: " + condition + "\n" + "\n";
+            System.out.println(message);
         }
         return message;
     }
